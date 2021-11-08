@@ -17,4 +17,21 @@ library(kableExtra)
 library(modelsummary)
 ```
 
+## Intro to ggpairs
+
+Use `GGally::ggpairs()` function to create a pairs plot
+
+```{r}
+ggpairs(penguins)
+```
+
+```{r}
+penguins %>% 
+  select(species, bill_length_mm:body_mass_g) %>% 
+  ggpairs(aes(color = species))
+
+ggplot(penguins, aes(x=bill_depth_mm, y = body_mass_g, group = species))+
+  geom_point(aes(color = species)) +
+  geom_smooth(method = "lm")
+```
 
