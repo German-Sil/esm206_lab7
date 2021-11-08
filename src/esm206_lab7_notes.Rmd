@@ -15,6 +15,7 @@ library(GGally)
 library(broom)
 library(kableExtra)
 library(modelsummary)
+library(stargazer)
 ```
 
 ## Intro to ggpairs
@@ -104,8 +105,31 @@ penguin_lm_2_tidy
 
 mass(g) = `r penguin_lm_2_tidy$estimate[1]`+ `r penguin_lm_2_tidy$estimate[2]` * flipper length (mm) + `r penguin_lm_2_tidy$estimate[3]` * Chinstrap + `r penguin_lm_2_tidy$estimate[4]` * Gentoo + `r penguin_lm_2_tidy$estimate[5]` * Male
 
+```{r}
+augment(penguin_lm_2)
 
+```
 
+## Use plot() to look at mode diagnostics
+
+```{r}
+plot(penguin_lm_2)
+```
+
+- Conceptual understanding and expertise allows me to responsibly determine that penguin species, sex, and flipper length are reasonable predictor variable (make sure you're thinking hard about variables and different variable combinations)
+- Diagnostic plots all check out for normality of residuals, homoscedasticity, and no worrisome outliers (<< last one is not an assumption)
+
+## Make output tables
+
+Using modelsummary:
+```{r}
+modelsummary(penguin_lm_2)
+```
+
+Using stargazer:
+```{r, results = "asis"}
+stargazer(penguin_lm_2, penguin_lm, type = "html")
+```
 
 
 
